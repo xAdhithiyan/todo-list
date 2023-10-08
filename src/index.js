@@ -1,1 +1,4 @@
-console.log(0)
+
+import modalPage from "./compoenets/modalPage";
+
+modalPage();
