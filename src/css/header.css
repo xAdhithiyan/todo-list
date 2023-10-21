@@ -1,0 +1,17 @@
+.header{
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.header div{
+    display: inline;
+    font-size: 2rem;
+
+}
+
+.header > img{
+    height: 50px;
+}

@@ -9,15 +9,15 @@ const todoList = function(){
     }
 
     // to create a single todo and update the todoList
-    function updateTodos(title, description, dueDate, priority, checklist){
+    function updateTodos(title, description, dueDate, priority,){
         todos.push({
             title,
             description,
             dueDate,
             priority,
-            checklist
         }); 
         console.log(todos)
+        pubsub.publish("todosUpdated", todos);
     }
 
     return {
