@@ -1,7 +1,6 @@
 const pubsub = {
     events: {},
     subscribe: function(evName, fn) {
-        console.log("sub");
         //add an event with a name as new or to existing list
         this.events[evName] = this.events[evName] || [];
         this.events[evName].push(fn);
@@ -13,7 +12,6 @@ const pubsub = {
         }
     },
     publish: function(evName, data) {
-        console.log("pub");
         //emit|publish|announce the event to anyone who is subscribed
         if (this.events[evName]) {
             this.events[evName].forEach(f => {

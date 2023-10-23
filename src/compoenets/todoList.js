@@ -16,7 +16,7 @@ const todoList = function(){
             dueDate,
             priority,
         }); 
-        console.log(todos)
+        // console.log(todos)
         pubsub.publish("todosUpdated", todos);
     }
 
@@ -27,7 +27,6 @@ const todoList = function(){
 
 }();
 
-todoList.updateTodos("ads","sdasdads","9th","high","true");
 
 export default todoList;
 

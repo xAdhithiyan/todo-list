@@ -1,11 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+
 :root{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Dosis', sans-serif;
 }
 
-body{
+html{
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E3D888;
+}
+body{
+    height: 80vh;
+    width: 80vw;
     display: grid;
     grid-template-columns: 400px 4fr;
-    grid-template-rows: 80px 1fr auto;
+    grid-template-rows: 80px auto 1fr auto;
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 10px 10px;
+    position: relative; 
 }

@@ -3,15 +3,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 
 .header div{
     display: inline;
-    font-size: 2rem;
-
+    font-size: 3rem;
+    margin-left: 20px;
 }
 
 .header > img{
     height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+hr{
+    width: 95%;
+    border: 1px solid black;
+    margin-bottom:0px;
+    margin-top:0px;
+    grid-column: 1 / 3;
 }

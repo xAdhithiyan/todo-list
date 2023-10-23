@@ -1,0 +1,36 @@
+.todos > div{
+    display:grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
+    gap:10px;
+    margin-bottom: 20px;
+}
+.todos{
+    margin:10px;
+    margin-top: 30px;
+    font-size:1.3rem;
+}
+
+.dueDate{
+    width: 200px;
+    text-align: center;
+}
+
+.addTodos{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50%;
+    border:3px solid black;
+    background-color: #eee;
+
+    height: 65px;
+    width: 65px;
+    fill: green;
+}
+.addTodos:hover{
+    transform: rotate(180deg);
+    transition-duration: 0.5s;
+    height: 70px;
+    width: 70px;
+}

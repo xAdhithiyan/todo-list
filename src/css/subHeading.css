@@ -1,0 +1,20 @@
+.subHeading{
+    margin: 10px;
+    background-color: #eee;
+    border-radius: 20px;
+    padding: 10px;
+    padding-right: 15px;
+}
+.subHeading > div{
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
+    font-size: 1.5rem;
+    margin-top:20px;
+}
+.subHeading  button{
+    width: 200px;
+    text-align: left;
+    background-color: #eee;
+    border: 0px solid #eee;
+}
