@@ -3,6 +3,7 @@ import elFactory from "../createDomElements";
 import todoList from "./todoList";
 import addImage from "/images/add.svg";
 import "../css/modalPage.css"
+import pubsub from "../pubSub";
 
 function createModalPage(){
     let form = document.querySelector("form")
@@ -32,10 +33,8 @@ function template(title, type , name, value = ""){
 }
 
 
-
 function modalPage(){
     let modal = document.querySelector(".modal");
-    modal.showModal() // must be deleted
     let submitBtn = document.querySelector(".formSubmit");
     let closeBtn = document.querySelector(".formClose");
 
@@ -44,18 +43,33 @@ function modalPage(){
     img.addEventListener("click", () => modal.showModal());
     document.querySelector("body").appendChild(img);
 
-    closeBtn.addEventListener("click", () => modal.close());
+    closeBtn.addEventListener("click", () => {
+        modal.close();
+        if(modal.id){
+            let allInputs = document.querySelectorAll(".modalInputs");
+            allInputs.forEach(e => {
+                if(e.type != "radio"){
+                    e.value = "";
+                }
+            });
+            modal.removeAttribute("id", modal.id);
+        }
+    });
     submitBtn.addEventListener("click", (e) => {
         if(document.querySelector("form").reportValidity()){
             e.preventDefault();
             let allInputs = document.querySelectorAll(".modalInputs");
-            console.log(allInputs)
             
             // converting the format of the date(obtained from input box) using format function of date-fns package
-            let newDate = format(new Date(allInputs[2].value) , "dd-MM-yyyy")
+            let newDate = format(new Date(allInputs[2].value) , "dd-MM-yyyy");
 
-            // updated the todoList -> could have used pub/sub, but since only one module depends on these values i just imported that module
-            todoList.updateTodos(allInputs[0].value, allInputs[1].value, newDate, allInputs[3].checked ? allInputs[3].value : allInputs[4].value,);
+            if(modal.id){
+                pubsub.publish("editTodo", {id: modal.id, details: [allInputs[0].value, allInputs[1].value, newDate, allInputs[3].checked ? allInputs[3].value : allInputs[4].value],});
+                modal.removeAttribute("id", modal.id);
+            }else{
+                // updated the todoList -> could have used pub/sub, but since only one module depends on these values I just imported that module
+                todoList.updateTodos(allInputs[0].value, allInputs[1].value, newDate, allInputs[3].checked ? allInputs[3].value : allInputs[4].value,);
+            }
 
             // reset all the values 
             allInputs.forEach(e => {

@@ -1,21 +1,44 @@
+.todos{
+    margin:10px;
+    margin-right:20px ;
+    margin-top: 30px;
+    font-size:1.3rem;
+}
 .todos > div{
     display:grid;
     grid-auto-flow: column;
     grid-template-columns: auto 1fr;
-    gap:10px;
+    gap:20px;
     margin-bottom: 20px;
+    padding: 10px;  
+    border-radius: 5px;
+    background-color: #eee;
 }
-.todos{
-    margin:10px;
-    margin-top: 30px;
-    font-size:1.3rem;
+.todos > div:hover{
+    transform: scale(1.01);
+    box-shadow: 2px 2px 4px ;
+    transition: 0.2s;
 }
-
 .dueDate{
     width: 200px;
     text-align: center;
 }
+.todos > div > div:nth-child(4),
+.todos > div > div:nth-child(5),
+.todos > div > div:nth-child(6){
+    height: 22px;
+    width: 22px;
+}
+.todos > div img{
+    height: 20px;
+}
+.todos > div img:hover{
+    height: 22px;
+}
 
+.todos > div > input{
+    accent-color: #E3D888;
+}
 .addTodos{
     position: absolute;
     bottom: 10px;
@@ -23,7 +46,6 @@
     border-radius: 50%;
     border:3px solid black;
     background-color: #eee;
-
     height: 65px;
     width: 65px;
     fill: green;
@@ -33,4 +55,12 @@
     transition-duration: 0.5s;
     height: 70px;
     width: 70px;
+}
+
+.lowPriority{
+    border-bottom: 2px solid green;
+}
+
+.highPriority{
+    border-bottom: 2px solid coral;
 }
