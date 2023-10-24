@@ -16,23 +16,19 @@ function addTodoPage(todos){
     todos.forEach(todo => {
 
         let div = elFactory("div", {id: `${todo.id}`}, "");
-        div.appendChild(elFactory("input", {type: "checkbox"}, ""));
+        // checkbox
+        let todoBox = elFactory("input", {type: "checkbox"}, "");
+        todoCheckbox(todoBox, div);
+        // title and date
         div.appendChild(elFactory("div", {}, todo["title"]));
         div.appendChild(elFactory("div", {class: "dueDate"}, todo["dueDate"]));
-
-        let viewDiv = elFactory("div", {}, "");
-        viewDiv.appendChild(elFactory("img", {src: viewImg, alt: "view"}, ""))
-        div.appendChild(viewDiv);
-
+        viewTodo(div);
         editTodo(div);
         deleteTodo(div);
 
-        // to add priority color
-        if(todo.priority == "high"){
-            div.classList.add("highPriority")
-        }else{
-            div.classList.add("lowPriority")
-        }
+        checkPriority(div, todo);
+        CheckTodo(div, todo, todoBox);
+
         todoDiv.appendChild(div);
     })
 }
@@ -76,6 +72,54 @@ function editTodo(parentDiv){
         modal.showModal();
     })
     parentDiv.appendChild(div);
+}
+
+function viewTodo(parentDiv){
+    let div = elFactory("div", {}, "");
+    div.appendChild(elFactory("img", {src: viewImg, alt: "view"}, ""))
+    let viewModal = document.querySelector(".viewModal");
+    let closeButton = document.querySelector(".modalCloseButton");
+    div.addEventListener("click", e => {
+        let todo = todoList.allTodos().filter(n => n.id == e.target.parentNode.parentNode.id);
+
+        document.querySelector(".viewTitle").textContent = todo[0].title;
+        document.querySelector(".viewDesc").textContent = todo[0].description;
+        document.querySelector(".viewDueDate").textContent = todo[0].dueDate;
+        document.querySelector(".viewPriority").textContent = todo[0].priority;
+        
+        closeButton.addEventListener("click", e => viewModal.close())
+        viewModal.showModal();
+
+    })
+    parentDiv.appendChild(div); 
+}
+
+function todoCheckbox(todoBox, parentDiv){
+    todoBox.addEventListener("click", e => {
+        let todo = todoList.allTodos().filter(n => n.id == e.target.parentNode.id);
+        if(e.target.checked){
+            pubsub.publish("checkTodo", {id: todo[0].id, val:"yes"})
+        }else{
+            pubsub.publish("checkTodo" , {id: todo[0].id, val:"no"});
+        }
+    })
+    parentDiv.appendChild(todoBox);
+}
+
+function checkPriority(div, todo){
+    if(todo.priority == "high"){
+        div.classList.add("highPriority")
+    }else{
+        div.classList.add("lowPriority")
+    }
+}
+
+function CheckTodo(parentDiv, todo, todoBox){
+    // to check if a todo is checked and to add styling
+    if(todo.finished == "yes"){
+        todoBox.checked = true
+        parentDiv.classList.add("checkedTodos")
+    }
 }
 
 export default todoPage;

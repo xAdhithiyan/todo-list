@@ -64,3 +64,33 @@
 .highPriority{
     border-bottom: 2px solid coral;
 }
+
+/* View Modal */
+.viewForm{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 400px;
+    font-size: 1.2rem;
+}
+
+.viewForm > div{
+    display: flex;
+}
+.viewForm > div > div:nth-child(1){
+    margin-right: 10px;
+}
+.viewForm > div:nth-child(5){
+    justify-content: center;
+    align-items: center;
+}
+.viewForm  button{
+    width: 90px;
+    height: 35px;
+} 
+
+/* styling to checked todos */
+.checkedTodos{
+    opacity: 0.5;
+    text-decoration: line-through;
+}

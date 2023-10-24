@@ -6,6 +6,7 @@ const todoList = function(){
     let count = 1;
     pubsub.subscribe("deleteTodo", deleteTodo);
     pubsub.subscribe("editTodo", editTodo);
+    pubsub.subscribe("checkTodo", checkTodo);
 
     function allTodos(){
         return todos;
@@ -19,6 +20,7 @@ const todoList = function(){
             description,
             dueDate,
             priority,
+            finished: "no",
         }); 
         console.log(todos)
         count++
@@ -40,7 +42,15 @@ const todoList = function(){
                 console.log(todo)
             }
         })
-        pubsub.publish("todosUpdated",todos)
+        pubsub.publish("todosUpdated",todos);
+    }
+    function checkTodo(checkDetails){
+        todos.forEach(todo => {
+            if(todo.id == checkDetails.id){
+                todo.finished = checkDetails.val;
+            }
+        })
+        pubsub.publish("todosUpdated",todos);
     }
 
     return {

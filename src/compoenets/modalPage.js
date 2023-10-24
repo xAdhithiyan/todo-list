@@ -85,5 +85,4 @@ function modalPage(){
 }
 
 createModalPage();
-
 export default modalPage;

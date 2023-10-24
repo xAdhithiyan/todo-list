@@ -5,50 +5,50 @@
 .modal::backdrop{
     background-color: rgba(0, 0, 0, 0.4);
 }
-form{
+.form{
     display: flex;
     flex-direction: column;
     gap:20px;
 }
-form > div {
+.form > div {
     display: flex;
     flex-direction: column;
     gap:7px;
 }
-form input{
+.form input{
     border: 2px solid white;
     border-bottom: 2px solid black;
 }
-form input:hover,
-form input:focus{
+.form input:hover,
+.form input:focus{
     outline: none;
 }
-.priorityDiv{
+.form .priorityDiv{
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
 }
-.priorityDiv > div:nth-child(1){
+.form .priorityDiv > div:nth-child(1){
     grid-column: 1 / 3;
     align-items: baseline;
 }
-.priorityDiv > div{
+.form .priorityDiv > div{
     display: flex;
     flex-direction: column;
     gap:5px;
     justify-content: center;
     align-items: center;
 }
-.priorityDiv input{
+.form > .priorityDiv input{
     accent-color: rgb(143, 143, 1);
 }
-.modalBtns{
+.form .modalBtns{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap:20px;
 }
 
-.modalBtns > button{
+.form .modalBtns > button{
     width: 100px;
     height: 30px;
 }
