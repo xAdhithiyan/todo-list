@@ -22,11 +22,11 @@
 
 .home:hover,
 .today:hover{
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 .increaseFont{
-    font-size: 2rem;
-    transform: scale(1.05);
+    font-size: 2.2rem !important;
+    transform: scale(1.05) ;
     transition: 0.5s;
 }
 .subHeading > button{
@@ -37,7 +37,6 @@
     border-radius: 7px;
     margin:5px;
     margin-left:20px
-
 }
 
 .projects {
@@ -51,4 +50,15 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr;
+}
+
+.projects > button{
+    font-size: 1.8rem;
+}
+.projects > div > button{
+    margin-top:5px;
+    font-size: 1.7rem;
+}
+.projects > div > button:hover{
+    font-size: 2.2rem;
 }

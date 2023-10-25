@@ -19,14 +19,17 @@ function decidingSubHeading(){
         pubsub.publish("decidingTab", "Home")
         document.querySelector(".home").classList.add("increaseFont");
         document.querySelector(".today").classList.remove("increaseFont");
+        removeBtnClass();
     })
     document.querySelector(".today").addEventListener("click", e => {
         pubsub.publish("decidingTab", "today");
-        document.querySelector(".home").classList.remove("increaseFont");
         document.querySelector(".today").classList.add("increaseFont");
+        document.querySelector(".home").classList.remove("increaseFont");
+        removeBtnClass();
     })
 }
 
+//for already present projects
 function projectHeading(){
     let projects = document.querySelector(".projects").children;
     projects = Array.from(projects);
@@ -34,6 +37,10 @@ function projectHeading(){
     projects.forEach(proj => {
         proj.addEventListener("click", e => {
             pubsub.publish("decidingTab", proj.children[1].classList.value);
+            document.querySelector(".today").classList.remove("increaseFont");
+            document.querySelector(".home").classList.remove("increaseFont");
+            removeBtnClass()
+            e.target.classList.add("increaseFont")
         })
     })
 }
@@ -62,7 +69,7 @@ function projectTodoList(todos){
     projects = Array.from(projects);
     projects.shift();
     projects.forEach(proj => {
-        let newTodos = todos.filter(todo => todo.projectTab ==  proj.children[1].classList.value)
+        let newTodos = todos.filter(todo => todo.projectTab ==  proj.children[1].classList.value && todo.finished == "no")
         proj.children[1].textContent = newTodos.length
     })
 }
@@ -90,6 +97,10 @@ function addProjectButton(){
         let tabBtn = elFactory("button", {} , projectName)
         tabBtn.addEventListener("click", e => {
             pubsub.publish("decidingTab", projectClassName);
+            document.querySelector(".today").classList.remove("increaseFont");
+            document.querySelector(".home").classList.remove("increaseFont");
+            removeBtnClass();
+            e.target.classList.add("increaseFont")
         })
         div.append(tabBtn);
         div.appendChild(elFactory("div", {class: projectClassName}, "0"));
@@ -105,6 +116,15 @@ function addProjectButton(){
         modal.close();
 
     })
+
+}
+function removeBtnClass(){
+    let projects = document.querySelector(".projects").children;
+    projects = Array.from(projects);
+    projects.shift();
+    projects.forEach(n => {
+        n.children[0].classList.remove("increaseFont")
+    });
 
 }
 

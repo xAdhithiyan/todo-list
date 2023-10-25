@@ -1,0 +1,17 @@
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%)
+}
+.footer img{
+    height: 35px;
+}
+.footer img:hover{
+    transform: rotate(720deg);
+    transition: all 1s;
+}
