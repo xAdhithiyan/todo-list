@@ -1,5 +1,5 @@
 import pubsub from "../pubSub";
-import { format } from "date-fns";
+import { format, sub } from "date-fns";
 import "../css/subHeading.css"
 import elFactory from "../createDomElements";
 import todoList from "./todoList";
@@ -143,5 +143,15 @@ pubsub.subscribe("BrowserLoadProjects", projects => {
         addProjectButtonEvent(key, proj[key]);
     })
     projectTodoList(todoList.allTodos());
+
+    // button increase font on referesh
+    let subHeadingBtn = todoList.allTodos()[0];
+    if(subHeadingBtn == "Home"){
+        document.querySelector(`.home`).classList.add("increaseFont");
+    }else if(subHeadingBtn == "today"){
+        document.querySelector(`.today`).classList.add("increaseFont");
+    }else{
+        document.querySelector(`.${todoList.allTodos()[0]}`).previousElementSibling.classList.add("increaseFont")
+    }
 })
 export default subHeading;
