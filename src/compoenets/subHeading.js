@@ -2,6 +2,7 @@ import pubsub from "../pubSub";
 import { format } from "date-fns";
 import "../css/subHeading.css"
 import elFactory from "../createDomElements";
+import todoList from "./todoList";
 
 function updateSubHeading(todos){
     homeTodosList(todos);
@@ -91,26 +92,8 @@ function addProjectButton(){
         let projectName = inputBox.value;
         let projectClassName = projectName.split(" ")[0];
         
-        // creating the div
-        let projectsDiv = document.querySelector(".projects");
-        let div = elFactory("div", {} , "");
-        let tabBtn = elFactory("button", {} , projectName)
-        tabBtn.addEventListener("click", e => {
-            pubsub.publish("decidingTab", projectClassName);
-            document.querySelector(".today").classList.remove("increaseFont");
-            document.querySelector(".home").classList.remove("increaseFont");
-            removeBtnClass();
-            e.target.classList.add("increaseFont")
-        })
-        div.append(tabBtn);
-        div.appendChild(elFactory("div", {class: projectClassName}, "0"));
-        projectsDiv.append(div);
-        
-        //adding class to dropdown
-        let dropdown = document.querySelector(".dropdown");
-        dropdown.appendChild(elFactory("option" , {value: projectClassName}, projectName));
-        
-        //adding eventListner to button
+        pubsub.publish("updateProjects", {[projectName]: projectClassName});
+        addProjectButtonEvent(projectName, projectClassName);
 
         inputBox.value = "";
         modal.close();
@@ -118,6 +101,29 @@ function addProjectButton(){
     })
 
 }
+
+function addProjectButtonEvent(projectName, projectClassName){
+    // creating the div
+    let projectsDiv = document.querySelector(".projects");
+    let div = elFactory("div", {} , "");
+    let tabBtn = elFactory("button", {} , projectName)
+    tabBtn.addEventListener("click", e => {
+        pubsub.publish("decidingTab", projectClassName);
+        document.querySelector(".today").classList.remove("increaseFont");
+        document.querySelector(".home").classList.remove("increaseFont");
+        removeBtnClass();
+        e.target.classList.add("increaseFont")
+    })
+    div.append(tabBtn);
+    div.appendChild(elFactory("div", {class: projectClassName}, "0"));
+    projectsDiv.append(div);
+    
+    //adding class to dropdown
+    let dropdown = document.querySelector(".dropdown");
+    dropdown.appendChild(elFactory("option" , {value: projectClassName}, projectName));
+}
+
+
 function removeBtnClass(){
     let projects = document.querySelector(".projects").children;
     projects = Array.from(projects);
@@ -131,4 +137,11 @@ function removeBtnClass(){
 decidingSubHeading();
 projectHeading();
 addProjectButton();
+pubsub.subscribe("BrowserLoadProjects", projects => {
+    projects.forEach(proj => {
+        let key = Object.keys(proj)[0];
+        addProjectButtonEvent(key, proj[key]);
+    })
+    projectTodoList(todoList.allTodos());
+})
 export default subHeading;

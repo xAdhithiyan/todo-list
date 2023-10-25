@@ -20,15 +20,12 @@ function addTodoPage(todos){
         let tab = todosCopy.shift();
         todosCopy = todos.filter(todo => todo[tab] == "yes");
     }else{
-        console.log(todos);
         let tab = todosCopy.shift();
         todosCopy = todos.filter(todo => todo.projectTab == tab);
-        console.log(todosCopy)
     }
 
     todosCopy.forEach(todo => {
 
-        console.log
         let div = elFactory("div", {id: `${todo.id}`}, "");
         // checkbox
         let todoBox = elFactory("input", {type: "checkbox"}, "");

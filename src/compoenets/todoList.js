@@ -1,16 +1,26 @@
+import { sub } from "date-fns";
 import pubsub from "../pubSub";
 
 // to display and update todoList(module pattern)
 const todoList = function(){
     let todos = ["Home",];
     let count = 1;
+    let projects = [];
     pubsub.subscribe("deleteTodo", deleteTodo);
     pubsub.subscribe("editTodo", editTodo);
     pubsub.subscribe("checkTodo", checkTodo);
-    pubsub.subscribe("decidingTab", decidingTab)
+    pubsub.subscribe("decidingTab", decidingTab);
+    pubsub.subscribe("updateProjects", updateProjects)
+    pubsub.subscribe("BrowserRefreshTodos", BrowserRefreshTodos);
+    pubsub.subscribe("BrowserRefreshProjects", BrowserRefreshProjects);
+    
 
     function allTodos(){
         return todos;
+    }
+    
+    function allProjects(){
+        return projects;
     }
 
     // to create a single todo and update the todoList
@@ -46,7 +56,6 @@ const todoList = function(){
                 todo.projectTab = editedTodoDetails.details[5];
             }
         })
-        console.log(todos);
         pubsub.publish("todosUpdated",todos);
     }
 
@@ -63,9 +72,25 @@ const todoList = function(){
         todos[0] = tab;
         pubsub.publish("todosUpdated", todos);
     }
+
+    function BrowserRefreshTodos(newTodos){
+        todos = newTodos;
+        pubsub.publish("todosUpdated", todos);
+    }
+
+    function updateProjects(newProject){
+        projects.push(newProject);
+    }
+
+    function BrowserRefreshProjects(newProject){
+        projects = newProject;
+        pubsub.publish("BrowserLoadProjects", projects)
+    }
+
     return {
         allTodos,
-        updateTodos
+        updateTodos,
+        allProjects
     }
 
 }();
