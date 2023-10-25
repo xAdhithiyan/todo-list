@@ -10,17 +10,25 @@
     <hr>
     <div class="subHeading">
         <div>
-            <button>Home</button>
-            <div class="home"></div> 
+            <button class="home">Home</button>
+            <div></div> 
         </div>
         <div>
-            <button>Today</button>
-            <div class="today"></div>
-        </div>
-        <div>
-            <button>Projects</button>
+            <button class="today">Today</button>
             <div></div>
         </div>
+        <div class="projects">
+            <button>Projects</button>
+            <div>
+                <button>College Stuff</button>
+                <div class="collegeStuff"></div>
+            </div>
+            <div>
+                <button>House work</button>
+                <div class="houseWork"></div>
+            </div>
+        </div>
+        <button class="addProject">Add Project</button>
 
     </div>
     <div class="todos"></div>
@@ -53,5 +61,15 @@
         </form>
     </dialog>
 
+    <dialog class="addProjectModal">
+        <form action="#" class="form">
+            <label for="addProject">Project</label>
+            <input class="addProjectInput" type="text" id="addProject" name="addProject" autocomplete="off" required>
+            <div>
+                <button type="submit" class="addProjectSubmitBtn">submit</button>
+                <button type="button" class="addProjectCloseBtn">close</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

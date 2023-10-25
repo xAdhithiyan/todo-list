@@ -94,3 +94,7 @@
     opacity: 0.5;
     text-decoration: line-through;
 }
+
+.notToday{
+    display: none !important;
+}

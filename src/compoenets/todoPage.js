@@ -11,10 +11,24 @@ import { format } from "date-fns";
 function addTodoPage(todos){
     let todoDiv = document.querySelector(".todos");
     todoDiv.innerHTML = "";
-    
-    // console.log(todos)
-    todos.forEach(todo => {
 
+    // creates a copy of the todos arr -> different memory and they both point to their own locations 
+    let todosCopy = [...todos];
+    if(todos[0] == "Home"){
+        todosCopy.shift();
+    }else if(todos[0] == "today"){
+        let tab = todosCopy.shift();
+        todosCopy = todos.filter(todo => todo[tab] == "yes");
+    }else{
+        console.log(todos);
+        let tab = todosCopy.shift();
+        todosCopy = todos.filter(todo => todo.projectTab == tab);
+        console.log(todosCopy)
+    }
+
+    todosCopy.forEach(todo => {
+
+        console.log
         let div = elFactory("div", {id: `${todo.id}`}, "");
         // checkbox
         let todoBox = elFactory("input", {type: "checkbox"}, "");
@@ -68,6 +82,8 @@ function editTodo(parentDiv){
         }else{
             allInputs[4].checked = true;
         }
+
+        allInputs[5].value = todo[0].projectTab;
         
         modal.showModal();
     })

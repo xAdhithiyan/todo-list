@@ -2,28 +2,31 @@ import pubsub from "../pubSub";
 
 // to display and update todoList(module pattern)
 const todoList = function(){
-    let todos = [];
+    let todos = ["Home",];
     let count = 1;
     pubsub.subscribe("deleteTodo", deleteTodo);
     pubsub.subscribe("editTodo", editTodo);
     pubsub.subscribe("checkTodo", checkTodo);
+    pubsub.subscribe("decidingTab", decidingTab)
 
     function allTodos(){
         return todos;
     }
 
     // to create a single todo and update the todoList
-    function updateTodos(title, description, dueDate, priority,){
+    function updateTodos(title, description, dueDate, priority, today, projectTab){
         todos.push({
             id: count,
             title,
             description,
             dueDate,
             priority,
+            today,
+            projectTab,
             finished: "no",
         }); 
-        console.log(todos)
         count++
+        // console.log(todos)
         pubsub.publish("todosUpdated", todos);
     }
 
@@ -39,11 +42,14 @@ const todoList = function(){
                 todo.description = editedTodoDetails.details[1];
                 todo.dueDate = editedTodoDetails.details[2];
                 todo.priority = editedTodoDetails.details[3];
-                console.log(todo)
+                todo.today = editedTodoDetails.details[4];
+                todo.projectTab = editedTodoDetails.details[5];
             }
         })
+        console.log(todos);
         pubsub.publish("todosUpdated",todos);
     }
+
     function checkTodo(checkDetails){
         todos.forEach(todo => {
             if(todo.id == checkDetails.id){
@@ -53,6 +59,10 @@ const todoList = function(){
         pubsub.publish("todosUpdated",todos);
     }
 
+    function decidingTab(tab){
+        todos[0] = tab;
+        pubsub.publish("todosUpdated", todos);
+    }
     return {
         allTodos,
         updateTodos

@@ -13,6 +13,7 @@ todoPage();
 modalPage();
 subHeading();
 
-todoList.updateTodos("Cooking","need to Cook Dinner","11-10-2023","high","true"); // needs to be deleted
-todoList.updateTodos("Sleeping","need to Sleep at 8","12-10-2023","low","true"); // needs to be deleted
+todoList.updateTodos("Cooking","need to Cook Dinner","11-10-2023","high", "no", "houseWork"); // needs to be deleted
+todoList.updateTodos("Write Record","need to write Physics Record","24-10-2023","low", "no" , "collegeStuff"); // needs to be deleted
+todoList.updateTodos("Coding","need to finish the odin project","24-10-2023","low", "no", "collegeStuff"); // needs to be deleted
 

@@ -9,12 +9,46 @@
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     margin-top:20px;
 }
 .subHeading  button{
     width: 200px;
+    height: 40px;
     text-align: left;
     background-color: #eee;
     border: 0px solid #eee;
+}
+
+.home:hover,
+.today:hover{
+    font-size: 2rem;
+}
+.increaseFont{
+    font-size: 2rem;
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+.subHeading > button{
+    background-color: white;
+    width: 100px;
+    text-align: center;
+    border:2px solid black;
+    border-radius: 7px;
+    margin:5px;
+    margin-left:20px
+
+}
+
+.projects {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.projects > div{
+    margin:5px;
+    margin-left:20px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
 }
